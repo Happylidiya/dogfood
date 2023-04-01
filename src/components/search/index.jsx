@@ -5,7 +5,14 @@ import { ReactComponent as SearchIcon } from './assets/ic-search.svg';
 export function Search({ handleFormSubmit, handleInputChange }) {
   return (
     <form className='search' onSubmit={handleFormSubmit}>
-      <input type="text" className="search__input" onChange={(e) => {handleInputChange(e.target.value)}} placeholder='Поиск' />
+      <input 
+      type="text" 
+      className="search__input" 
+      onChange={(e) => {
+        handleInputChange(e.target.value);
+        }} 
+        placeholder='Поиск' 
+      />
       <button className="search__btn">
         <SearchIcon />
         <CloseIcon />

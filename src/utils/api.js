@@ -44,12 +44,23 @@ class Api {
             .then(this.#onResponse)
     }
 
-    changeLikeProductStatus(productId, like) {
-        return fetch(`${this.#baseurl}/products/likes/${productId}`, {
+    changeLikeProductStatus(productID, like) {
+        return fetch(`${this.#baseurl}/products/likes/${productID}`, {
             method: like ? 'DELETE' : 'PUT',
             headers: this.#headers,
         })
             .then(this.#onResponse)
+    }
+
+    getProductById(idProduct) {
+        return fetch(`${this.#baseurl}/products/${idProduct}`, {
+            headers: this.#headers
+        })
+            .then(this.#onResponse)
+    }
+
+    getInfoProduct(idProduct) {
+        return Promise.all([this.getProductById(idProduct), this.getUserInfo()])
     }
 
 
@@ -64,4 +75,3 @@ const api = new Api({
 })
 
 export default api;
-

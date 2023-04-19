@@ -4,12 +4,14 @@ import "./styles.css";
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/current-user-context';
 import { CardsContext } from '../../contexts/card-context';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as FavoriteIcon} from './img/favorites.svg'
 
 export function Header({ children }) {
   const { currentUser, onUpdateUser } = useContext(UserContext);
   const { favorites } = useContext(CardsContext)
+  const location = useLocation()
+  
   const handleClickButtonEdit = () => {
     onUpdateUser({ name: 'Вася', about: 'Ментор' })
   }
@@ -23,6 +25,7 @@ export function Header({ children }) {
             <FavoriteIcon />
             {favorites.length !== 0 && <span className={s.iconBubble}>{favorites.length}</span>}
           </Link>
+          <Link to='/login' style= {{paddingLeft: "10px"}} replace state={{backgroundLocation: location, initialPath: location.pathname}}>Войти</Link>
         </div>
 
         {/* <span>{currentUser?.name}: {currentUser?.about}</span>

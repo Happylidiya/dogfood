@@ -63,6 +63,15 @@ class Api {
         return Promise.all([this.getProductById(idProduct), this.getUserInfo()])
     }
 
+   
+    createReviewProduct(idProduct, reviewData) {
+		return fetch(`${this.#baseurl}/products/review/${idProduct}`, {
+			method: "POST",
+			headers: this.#headers,
+			body: JSON.stringify(reviewData)
+		})
+            .then(this.#onResponse)
+	}
 
 }
 

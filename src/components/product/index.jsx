@@ -6,13 +6,16 @@ import { ReactComponent as LikeIcon } from '../../images/save.svg';
 import truck from "../../images/truck.svg";
 import quality from "../../images/quality.svg";
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/current-user-context';
 import { ContentHeader } from '../content-header';
+import Rating from '../rating';
+import FormReview from '../form-review';
 
 
-function Product({ onProductLike, _id, name, pictures, description, discount, price, likes = [], reviews }) {
+function Product({ onProductLike, _id, name, pictures, description, discount, price, likes = [], setProduct  }) {
 const { currentUser } = useContext(UserContext);
+const [currentRating, setCurrentRating] = useState(5);
 const navigate = useNavigate();
 const discount_price = calcDiscountPrice(price, discount);
 const like = isLiked(likes, currentUser?._id)
@@ -28,6 +31,7 @@ function createMarkupDescription() {
         <>
             <ContentHeader textButton="Назад" title={name}>
                 <p className={s.articul}>Артикул: <b>2388907</b></p>
+                <Rating currentRating={currentRating}  />
             </ContentHeader>
             <div className={s.product}>
                 <div className={s.imgWrapper}>
@@ -112,8 +116,8 @@ function createMarkupDescription() {
                         <p>Следует учесть высокую калорийность продукта.</p>
                     </div>
                 </div>
-
             </div>
+            <FormReview title={`Отзыв о товаре ${name}`} _id={_id} setProduct={setProduct}/>
         </>
     );
 }

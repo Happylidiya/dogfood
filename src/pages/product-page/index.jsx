@@ -31,7 +31,7 @@ export const ProductPage = () => {
         <>
             {isLoading
                 ? <Spinner />
-                : !errorState && <Product {...product} onProductLike={handleProductLike} />
+                : !errorState && <Product {...product} setProduct={setProduct} onProductLike={handleProductLike} />
             }
             
             {!isLoading && errorState && <NotFound title="Товар не найден" />}

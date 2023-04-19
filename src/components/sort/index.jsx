@@ -14,8 +14,8 @@ export function Sort({ tabs = [] }) {
 
   return (
     <div className={s.sort}>
-      {tabs.map((tab, index) => (
-        <a key={index}
+      {tabs.map(tab => (
+        <a key={tab.id}
           className={cn(s.sort__link, { [s.sort__link_selected]: currentSort === tab.id })}
           href="#"
           onClick={(e) => handleClickTab(e, tab)}>
